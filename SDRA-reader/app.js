@@ -13,6 +13,7 @@ const readActionBtn = document.getElementById("read-action-btn");
 const superFullScreen = document.getElementById("super-full-screen");
 const aside = document.querySelector("aside");
 const file = document.querySelector(".list a");
+const downloadBtn = document.getElementById("download-btn");
 
 const asideBtn = document.querySelector(".aside-btn");
 const fontSizeControl = document.querySelector(".font-size-control");
@@ -379,6 +380,7 @@ if (readActionBtn) readActionBtn.addEventListener("click", openReadActions);
 if (fullScreen) fullScreen.addEventListener("click", ToogleFullScreen);
 if (superFullScreen) superFullScreen.addEventListener("click", SuperToogleFullScreen);
 if (asideBtn) asideBtn.addEventListener("click", openAside);
+if (downloadBtn) downloadBtn.addEventListener("click", downloadCurrentPage);
 
 function setupSidebarLinks() {
     const sidebarLinks = document.querySelectorAll('.list details a');
@@ -391,6 +393,114 @@ function setupSidebarLinks() {
             
         });
     });
+}
+
+// ----- دالة تحميل الصفحة -----
+async function downloadCurrentPage() {
+    try {
+        // تحديد نوع الملف من الإعدادات
+        const fileTypeSelect = document.getElementById('file-type-select');
+        const fileType = fileTypeSelect ? fileTypeSelect.value : 'pdf';
+        
+        if (fileType === 'pdf') {
+            await downloadAsPdf();
+        } else if (fileType === 'html') {
+            downloadAsHtml();
+        } else if (fileType === 'txt') {
+            downloadAsTxt();
+        }
+    } catch (error) {
+        console.error('Error downloading page:', error);
+        alert('حدث خطأ أثناء تحميل الصفحة');
+    }
+}
+
+// ----- تحميل كملف PDF -----
+async function downloadAsPdf() {
+    // استخدام مكتبة jsPDF إذا كانت متوفرة
+    if (typeof jsPDF !== 'undefined') {
+        const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
+        const iframeBody = iframeDoc.body;
+        
+        // إنشاء نسخة من محتوى iframe لتحويلها إلى PDF
+        const element = iframeDoc.cloneNode(true);
+        
+        // إنشاء مستند PDF جديد
+        const doc = new jsPDF();
+        
+        // تحويل المحتوى إلى PDF (هذا يتطلب مكتبة html2canvas)
+        if (typeof html2canvas !== 'undefined') {
+            const canvas = await html2canvas(element.body);
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 210;
+            const pageHeight = 295;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+
+            doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                doc.addPage();
+                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+            
+            // حفظ ملف PDF
+            doc.save('page-content.pdf');
+        } else {
+            // إذا لم تكن متوفرة، نستخدم وظيفة الطباعة
+            printIframeContent();
+        }
+    } else {
+        // تنبيه للمستخدم لتنزيل المكونات المطلوبة
+        alert('يرجى زيارة صفحة التنزيلات للحصول على الملف');
+        printIframeContent();
+    }
+}
+
+// ----- تحميل كملف HTML -----
+function downloadAsHtml() {
+    const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
+    const iframeHtml = iframeDoc.documentElement.outerHTML;
+    
+    const blob = new Blob([iframeHtml], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'page-content.html';
+    document.body.appendChild(a);
+    a.click();
+    
+    // تنظيف
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 100);
+}
+
+// ----- تحميل كملف نصي -----
+function downloadAsTxt() {
+    const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
+    const iframeText = iframeDoc.body.innerText || iframeDoc.body.textContent;
+    
+    const blob = new Blob([iframeText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'page-content.txt';
+    document.body.appendChild(a);
+    a.click();
+    
+    // تنظيف
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 100);
 }
 
  setupSidebarLinks(); 
