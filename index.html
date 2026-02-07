@@ -25,8 +25,17 @@
 
     </header>
 
-    <section>
-        <main>
+    <div class="container">
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>المحتوى</h3>
+            </div>
+            <ul id="content-list">
+                <!-- Content list will be populated here -->
+            </ul>
+        </aside>
+        
+        <main id="content-area">
             <div class="top">
                 <img src="icon.png" alt="">
                 <h1>      مدونة SDRA  </h1>
@@ -41,16 +50,31 @@
                 <input type="text" placeholder="ابحث عن مواضيع...">
                 <button type="submit">بحث</button>
             </form>
+            
+            <div id="cards" class="cards">
+                <!-- cards will render here automatically from database -->
+            </div>
         </main>
-
-
-        <div id="cards" class="cards">
-            <!-- cards will render here automatecly from data base -->
+    </div>
+    
+    <!-- AI Popup -->
+    <div id="ai-popup" class="ai-popup">
+        <div class="ai-popup-content">
+            <div class="ai-popup-header">
+                <h3>مساعد الذكاء الاصطناعي</h3>
+                <span class="close-ai" onclick="closeAI()">&times;</span>
+            </div>
+            <div class="ai-popup-body">
+                <div id="ai-response" class="ai-response">
+                    <!-- AI responses will appear here -->
+                </div>
+                <div class="ai-input-container">
+                    <input type="text" id="ai-input" placeholder="اطرح سؤالك هنا...">
+                    <button id="ai-send-btn" onclick="sendToAI()">إرسال</button>
+                </div>
+            </div>
         </div>
-
-
-
-    </section>
+    </div>
 
 
 

@@ -10,6 +10,13 @@ let languageSelect;
 let decreaseFontBtn;
 let increaseFontBtn;
 let resetFontBtn;
+let contentList;
+let sidebar;
+let contentArea;
+let aiPopup;
+let aiResponse;
+let aiInput;
+let aiSendBtn;
 
 // ----- الوضع الداكن -----
 function SwitchToDarkMode() {
@@ -86,6 +93,7 @@ const content = [
     { name: "NODE", src: "Root/node/Areader.html" },
 ];
 
+// ----- عرض المحتوى -----
 function renderContent(filter = "") {
     cards.innerHTML = ""; // مسح الكروت القديمة
 
@@ -105,6 +113,57 @@ function renderContent(filter = "") {
     });
 }
 
+// ----- عرض قائمة المحتوى -----
+function renderContentList() {
+    contentList.innerHTML = "";
+    
+    content.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.textContent = item.name;
+        li.onclick = () => loadContent(item.src);
+        contentList.appendChild(li);
+    });
+}
+
+// ----- تحميل المحتوى -----
+function loadContent(src) {
+    // Remove active class from all items
+    const items = contentList.querySelectorAll("li");
+    items.forEach(item => item.classList.remove("active"));
+    
+    // Find the correct element that was clicked
+    let clickedElement = event.target;
+    // If the click was on a child element of the li, get the parent li
+    while (clickedElement && clickedElement.tagName !== 'LI') {
+        clickedElement = clickedElement.parentElement;
+    }
+    
+    if (clickedElement) {
+        clickedElement.classList.add("active");
+    }
+    
+    // Load content into content area using fetch to avoid iframe
+    fetch(src)
+        .then(response => response.text())
+        .then(html => {
+            // Create a temporary element to parse the HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            // Extract the body content
+            const bodyContent = tempDiv.querySelector('body');
+            if (bodyContent) {
+                contentArea.innerHTML = bodyContent.innerHTML;
+            } else {
+                contentArea.innerHTML = tempDiv.innerHTML;
+            }
+        })
+        .catch(error => {
+            console.error('Error loading content:', error);
+            contentArea.innerHTML = '<p>حدث خطأ أثناء تحميل المحتوى</p>';
+        });
+}
+
 // ----- تحميل الصفحة -----
 window.addEventListener('DOMContentLoaded', () => {
     // ربط المتغيرات العامة بالعناصر
@@ -119,6 +178,13 @@ window.addEventListener('DOMContentLoaded', () => {
     decreaseFontBtn = document.getElementById("decrease-font");
     increaseFontBtn = document.getElementById("increase-font");
     resetFontBtn = document.getElementById("reset-font");
+    contentList = document.getElementById("content-list");
+    sidebar = document.getElementById("sidebar");
+    contentArea = document.getElementById("content-area");
+    aiPopup = document.getElementById("ai-popup");
+    aiResponse = document.getElementById("ai-response");
+    aiInput = document.getElementById("ai-input");
+    aiSendBtn = document.getElementById("ai-send-btn");
 
     // أحداث
     if (SettingsBtn) SettingsBtn.addEventListener("click", openSettings);
@@ -158,6 +224,54 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // عرض الكروت عند التحميل
     renderContent();
+    
+    // عرض قائمة المحتوى
+    renderContentList();
+});
+
+// ----- وظائف الذكاء الاصطناعي -----
+function openAI() {
+    aiPopup.style.display = "flex";
+}
+
+function closeAI() {
+    aiPopup.style.display = "none";
+}
+
+function sendToAI() {
+    const question = aiInput.value.trim();
+    if (!question) return;
+    
+    // إضافة السؤال إلى مربع الاستجابة
+    const questionElement = document.createElement("div");
+    questionElement.className = "ai-question";
+    questionElement.textContent = "السؤال: " + question;
+    aiResponse.appendChild(questionElement);
+    
+    // محاكاة استجابة الذكاء الاصطناعي (في الإصدار الفعلي، سيتم استخدام API حقيقي)
+    setTimeout(() => {
+        const responseElement = document.createElement("div");
+        responseElement.className = "ai-answer";
+        responseElement.textContent = "إجابة محاكاة للسؤال: " + question;
+        aiResponse.appendChild(responseElement);
+        
+        // تمرير إلى أسفل مربع الاستجابات
+        aiResponse.scrollTop = aiResponse.scrollHeight;
+        
+        // مسح مربع الإدخال
+        aiInput.value = "";
+    }, 1000);
+}
+
+// معالجة الضغط على Enter في مدخل الذكاء الاصطناعي
+document.addEventListener("DOMContentLoaded", () => {
+    if (aiInput) {
+        aiInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                sendToAI();
+            }
+        });
+    }
 });
 
 // دعم زر الرجوع في المتصفح
