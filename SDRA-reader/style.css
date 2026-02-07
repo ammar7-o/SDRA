@@ -1,0 +1,603 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+:root {
+    --primary-color: #2e7d32;
+    --background: #f8f9fa;
+    --header: #ffffff;
+    --text-color: #1f2937;
+    --aside: #f1f5f9;
+    --settings: #e5e7eb;
+    --iframe: #ffffff;
+    --hover: #a5a5a5;
+
+}
+
+.dark-mode {
+    --background: #0f172a;
+    --header: #020617;
+    --text-color: #e5e7eb;
+    --aside: #020617;
+    --settings: #020617;
+    --iframe: #020617;
+    --hover: #575757;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body i {
+    font-size: 20px;
+}
+
+body a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+/* === HEADER === */
+header {
+    background-color: var(--header);
+    height: auto;
+    min-height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 2px;
+    border-bottom: 2px gray solid;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 50px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+header nav ul a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+header nav ul a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+header .settings i {
+    color: var(--text-color);
+    font-size: 22px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.aside-btn {
+    display: none;
+}
+
+header .settings i:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* === MAIN LAYOUT === */
+body section {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* === SIDEBAR === */
+aside {
+    width: 100%;
+    height: auto;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: var(--aside);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border-bottom: 2px gray solid;
+    order: 2;
+    position: relative;
+}
+
+.list {}
+
+details {
+    width: 98%;
+    background-color: rgba(99, 99, 99, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border-radius: 10px;
+    gap: 8px;
+
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+details a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s;
+}
+
+details a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* === MAIN CONTENT === */
+main {
+    height: 100vh;
+    width: 100%;
+    order: 1;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    /* مهم */
+}
+
+main.fullScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background: var(--background);
+}
+
+main.fullScreen iframe {
+    width: 100%;
+    height: 100%;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    background-color: var(--iframe);
+    overflow: auto;
+    /* مهم */
+
+}
+
+/* === SETTINGS OVERLAY === */
+.settings-overlay {
+    padding: 20px 15px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--settings);
+    z-index: 1000;
+    transition: 0.4s;
+    overflow-y: auto;
+}
+
+.aside-btn {
+
+    height: fit-content;
+    padding: 5px;
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    z-index: 50;
+    align-items: center;
+    background-color: #21212157;
+    border-radius: 10px;
+    gap: 9px;
+    margin-right: 20px;
+    overflow: hidden;
+    transition: all 0.3s;
+    animation-direction: initial;
+    display: none;
+}
+.aside-btn:hover{
+     background-color: var(--hover);
+}
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.head h2 {
+    font-size: 1.8rem;
+}
+
+.close {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.settings-overlay.open {
+    right: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 999;
+    transition: 0.4s;
+}
+
+.overlay.open {
+    display: block;
+}
+
+.settings-overlay .item {
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.settings-overlay a {
+    border-radius: 50%;
+    padding: 10px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+}
+
+.settings-overlay a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* === RESPONSIVE BREAKPOINTS === */
+
+/* TABLETS (768px وما فوق) */
+@media (min-width: 768px) {
+    body section {
+        flex-direction: row;
+    }
+
+    aside {
+        width: 250px;
+        height: 100%;
+        max-height: none;
+        order: 1;
+        border-right: 2px gray solid;
+        border-bottom: none;
+    }
+
+    main {
+        width: calc(100% - 250px);
+        height: 100%;
+        order: 2;
+    }
+
+    .settings-overlay {
+        width: 350px;
+        right: -350px;
+    }
+
+    header {
+        padding: 0 10px;
+        flex-wrap: nowrap;
+    }
+
+    header nav ul {
+        gap: 20px;
+    }
+}
+
+/* DESKTOP (1024px وما فوق) */
+@media (min-width: 1024px) {
+    aside {
+        width: 300px;
+    }
+
+    main {
+        width: calc(100% - 300px);
+    }
+
+    header {
+        padding: 0 4px;
+    }
+
+    header nav ul {
+        gap: 25px;
+    }
+
+    .settings-overlay {
+        width: 400px;
+        right: -400px;
+    }
+}
+
+/* LARGE DESKTOP (1200px وما فوق) */
+@media (min-width: 1200px) {
+    aside {
+        width: 350px;
+    }
+
+    main {
+        width: calc(100% - 350px);
+    }
+}
+
+/* MOBILE MENU TOGGLE (للشاشات الصغيرة) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+@media (max-width: 767px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    header nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--header);
+        flex-direction: column;
+        padding: 20px;
+        border-bottom: 2px solid gray;
+        z-index: 100;
+    }
+
+    header nav ul.show {
+        display: flex;
+    }
+
+    header nav ul li {
+        width: 100%;
+    }
+
+    header nav ul a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+    }
+
+    aside {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 280px;
+        height: calc(100vh - 70px);
+        z-index: 99;
+        transition: left 0.3s;
+        border-right: 2px gray solid;
+    }
+
+    aside.show {
+        left: 0;
+    }
+
+    main {
+        width: 100%;
+    }
+}
+
+/* تحسينات إضافية للجوال */
+@media (max-width: 480px) {
+    header {
+        padding: 10px 15px;
+    }
+
+    header .logo span {
+        font-size: 1.2rem;
+    }
+
+    .settings-overlay {
+        padding: 15px 10px;
+    }
+
+    .head h2 {
+        font-size: 1.5rem;
+    }
+
+    .settings-overlay .item {
+        padding: 12px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .settings-overlay .item .label {
+        font-size: 1rem;
+    }
+}
+
+/* تحسينات للوضع الداكن */
+.dark-mode header nav ul a:hover,
+.dark-mode details a:hover {
+    background-color: rgba(46, 125, 50, 0.8);
+}
+
+.dark-mode .settings-overlay a:hover {
+    background-color: rgba(46, 125, 50, 0.8);
+}
+
+/* تحسين التمرير */
+aside::-webkit-scrollbar {
+    width: 6px;
+}
+
+aside::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+aside::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.settings-overlay::-webkit-scrollbar {
+    width: 6px;
+}
+
+.settings-overlay::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.settings-overlay::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.read-actions {
+    width: 70px;
+    height: fit-content;
+    padding: 5px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    background-color: #21212157;
+    border-radius: 10px;
+    gap: 9px;
+    overflow: hidden;
+    transition: all 0.5s;
+    animation-direction: initial;
+}
+
+.read-actions.open {
+    width: fit-content;
+}
+
+.read-actions div {
+
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#read-action-btn i {
+
+    transition: all 0.5s;
+
+
+}
+
+#read-action-btn.open i {
+
+    transform: rotate(180deg);
+
+
+}
+
+.read-actions div:hover {
+    background-color: var(--hover);
+}
+
+/* افتراضياً على الشاشات الصغيرة، اخفاء sidebar */
+@media (max-width: 768px) {
+    .aside-btn {
+        display: block;
+    }
+
+    aside {
+        transform: translateX(-100%);
+        /* مخفي عن الشاشة */
+        position: fixed;
+        top: 50px;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        z-index: 1000;
+        transition: transform 0.3s ease;
+    }
+
+    aside.open {
+        transform: translateX(0);
+        /* يظهر عند الضغط */
+    }
+
+    /* إضافة overlay نصف شفاف عند فتح القائمة */
+    .overlay-aside {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 900;
+    }
+
+    .overlay-aside.active {
+        display: block;
+    }
+}

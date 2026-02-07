@@ -1,0 +1,46 @@
+:root {
+    --primary-color: #2e7d32;
+    --background: #f8f9fa;
+    --header: #ffffff;
+    --text-color: #000000;
+    --aside: #f1f5f9;
+    --settings: #e5e7eb;
+    --iframe: #ffffff;
+    --hover: #a5a5a5;
+
+}
+
+.dark-mode {
+    --background: #0f172a;
+    --header: #020617;
+    --text-color: #ffffff;
+    --aside: #020617;
+    --settings: #020617;
+    --iframe: #020617;
+    --hover: #575757;
+}
+
+* {
+
+    font-family: sans-serif;
+    font-size: 1.2em;
+}
+
+html{
+    padding-top: 30px;
+}
+body {
+    padding-top: 30px;
+    color: var(--text-color);
+    font-family: sans-serif;
+}
+.rtl{
+    direction: rtl;
+}
+.ltr{
+    direction: ltr;
+
+}
+.center{
+    text-align: center;
+}

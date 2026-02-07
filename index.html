@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDRA Wiki</title>
+    <link rel="stylesheet" href="main/style.css">
+    <link rel="stylesheet" href="font-awesome/css/all.min.css">
+
+</head>
+
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="icon.png" alt="" class="icon">
+            <span>SDRA Wiki</span>
+        </div>
+        <nav>
+            <a class="menu-btn" href=""><i class="fas fa-bars"></i></a>
+            <a href="#" class="settings"><i class="fas fa-cog"></i></a>
+
+        </nav>
+
+    </header>
+
+    <section>
+        <main>
+            <div class="top">
+                <img src="icon.png" alt="">
+                <h1>      SDRA Wiki  </h1>
+
+
+            </div>
+            <p>
+                <i class="fa-solid fa-lightbulb"></i>
+                A wiki with many summaries for different things, from zero to hero
+            </p>
+
+            <form action="">
+                <input type="text" placeholder="Search topics...">
+               
+            </form>
+        </main>
+
+
+        <div id="cards" class="cards">
+            <!-- cards will render here automatecly from data base -->
+        </div>
+
+
+
+    </section>
+
+
+
+
+    <div class="settings-overlay">
+        <div class="head">
+            <h2>settings</h2>
+            <div onclick="openSettings()" class="close"><i class="fas fa-close"></i></div>
+        </div>
+        <div class="item">
+            <span class="label">Dark mode</span>
+            <a href="#" class="toogle-theme"><i class="fas fa-sun"></i></a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+</body>
+<script src="main/app.js"></script>
+
+</html>

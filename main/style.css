@@ -1,0 +1,464 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+:root {
+    --primary-color: #2e7d32;
+    --background: #f8f9fa;
+    --header: #ffffff;
+    --text-color: #1f2937;
+
+    --settings: #e5e7eb;
+    --input: #d4d4d4;
+
+    --hover: #a5a5a5;
+
+}
+
+.dark-mode {
+    --background: #0f172a;
+    --header: #020617;
+    --text-color: #e5e7eb;
+    --input: #2b2b2b;
+    --settings: #020617;
+
+    --hover: #575757;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body i {
+    font-size: 20px;
+}
+
+body a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+/* === HEADER === */
+header {
+    background-color: var(--header);
+    height: auto;
+    min-height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 2px gray solid;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: fixed;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 50px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+header nav ul a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+header nav ul a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+header .settings i {
+    color: var(--text-color);
+    font-size: 22px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+header .settings i:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* === MAIN LAYOUT === */
+body section {
+    padding-top: 50px;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+
+/* === SETTINGS OVERLAY === */
+.settings-overlay {
+    padding: 20px 15px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--settings);
+    z-index: 1000;
+    transition: 0.4s;
+    overflow-y: auto;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.head h2 {
+    font-size: 1.8rem;
+}
+
+.close {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.settings-overlay.open {
+    right: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 999;
+    transition: 0.4s;
+}
+
+.overlay.open {
+    display: block;
+}
+
+.settings-overlay .item {
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.settings-overlay a {
+    border-radius: 50%;
+    padding: 10px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+}
+
+.settings-overlay a:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+main {
+
+    padding: 40px 50px;
+    border-radius: 14px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     flex-wrap: wrap;
+}
+
+main img {
+    width: 100px;
+    height: 100px;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+}
+
+main h1 {
+    margin-bottom: 10px;
+    font-size: 2.2rem;
+    color: var(--text-color);
+}
+
+main p {
+    margin-bottom: 25px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+form {
+   
+    width: 40%;
+}
+
+form input {
+  
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: var(--input);
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+}
+
+form input:focus {
+    border-color: #4caf50;
+}
+
+form button {
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: none;
+    background: #4caf50;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #43a047;
+}
+
+/* === RESPONSIVE BREAKPOINTS === */
+
+/* TABLETS (768px وما فوق) */
+@media (min-width: 768px) {
+
+
+
+
+    .settings-overlay {
+        width: 350px;
+        right: -350px;
+    }
+
+    header {
+
+        flex-wrap: nowrap;
+    }
+
+    header nav ul {
+        gap: 20px;
+    }
+}
+
+/* DESKTOP (1024px وما فوق) */
+@media (min-width: 1024px) {
+
+    header {
+        padding: 0 40px;
+    }
+
+    header nav ul {
+        gap: 25px;
+    }
+
+    .settings-overlay {
+        width: 400px;
+        right: -400px;
+    }
+}
+
+/* LARGE DESKTOP (1200px وما فوق) */
+@media (min-width: 1200px) {}
+
+/* MOBILE MENU TOGGLE (للشاشات الصغيرة) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+@media (max-width: 767px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    header nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--header);
+        flex-direction: column;
+        padding: 20px;
+        border-bottom: 2px solid gray;
+        z-index: 100;
+    }
+
+    header nav ul.show {
+        display: flex;
+    }
+
+    header nav ul li {
+        width: 100%;
+    }
+
+    header nav ul a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+    }
+
+}
+
+/* تحسينات إضافية للجوال */
+@media (max-width: 480px) {
+    header {
+        padding: 10px 15px;
+    }
+
+    header .logo span {
+        font-size: 1.2rem;
+    }
+
+    .settings-overlay {
+        padding: 15px 10px;
+    }
+
+    .head h2 {
+        font-size: 1.5rem;
+    }
+
+    .settings-overlay .item {
+        padding: 12px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .settings-overlay .item .label {
+        font-size: 1rem;
+    }
+}
+
+/* تحسينات للوضع الداكن */
+.dark-mode header nav ul a:hover,
+.dark-mode details a:hover {
+    background-color: rgba(46, 125, 50, 0.8);
+}
+
+.dark-mode .settings-overlay a:hover {
+    background-color: rgba(46, 125, 50, 0.8);
+}
+
+
+.settings-overlay::-webkit-scrollbar {
+    width: 6px;
+}
+
+.settings-overlay::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.settings-overlay::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+   
+    overflow-y: scroll;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: fit-content;
+    height: 57px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: gray 2px solid;
+    display: flex;
+    overflow: hidden;
+    margin: 10px;
+    align-items: center;
+    gap: 8px;
+}
+
+.card i {
+    font-size: 1.3em;
+
+}
+
+.card span {
+    font-size: 1.3em;
+
+
+}
+
+/* افتراضياً على الشاشات الصغيرة، اخفاء sidebar */
+@media (max-width: 768px) {
+ main{
+    padding: 20px 0px;
+    justify-content: center;
+ }
+ form{
+    width: 100%;
+ }
+}

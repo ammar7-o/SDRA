@@ -1,0 +1,34 @@
+<script src="../../SDRA-reader/structure.js"></script>
+
+<script>
+    const wait = setInterval(() => {
+        const list = document.querySelector(".list");
+        if (!list) return;
+
+        list.innerHTML = `
+            <details open>
+                <summary>Pages</summary>
+                <a onclick="SetIframeSrc('index.html'); return false;">Start</a>
+                <a onclick="SetIframeSrc('main/pages/jj.html'); return false;">Other</a>
+            </details>
+        `;
+
+        clearInterval(wait);
+    }, 20);
+</script>
+<!-- <script>
+  simple
+
+    const list = document.querySelector(".list");
+
+
+    list.innerHTML = `
+            <details open>
+        <summary>Pages</summary>
+        <a onclick="SetIframeSrc('main/SDRA/index.html'); return false;">Start</a>
+        <a onclick="SetIframeSrc('main/pages/jj.html'); return false;">Other</a>
+
+    </details>
+        `;
+
+</script> -->
