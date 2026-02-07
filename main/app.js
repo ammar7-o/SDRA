@@ -81,6 +81,9 @@ const content = [
     { name: "CSS", src: "Root/css/Areader.html" },
     { name: "JS", src: "Root/js/Areader.html" },
     { name: "LINUX", src: "Root/linux/Areader.html" },
+    { name: "PYTHON", src: "Root/python/Areader.html" },
+    { name: "REACT", src: "Root/react/Areader.html" },
+    { name: "NODE", src: "Root/node/Areader.html" },
 ];
 
 function renderContent(filter = "") {

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python - مدونة SDRA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2e7d32;
+            --background: #f8f9fa;
+            --header: #ffffff;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --background: #0f172a;
+            --header: #020617;
+            --text-color: #e5e7eb;
+            --card-bg: #1e293b;
+            --border-color: #374151;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-right: 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background-color: rgba(46, 125, 50, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            direction: ltr;
+        }
+
+        pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .note {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-right: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-right: 4px solid var(--danger);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="../../font-awesome/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Python - من الصفر إلى الاحتراف</h1>
+        
+        <h2>مقدمة في Python</h2>
+        <p>Python هي لغة برمجة عالية المستوى تتميز بالyntax بسيط وسهل القراءة. تُستخدم في مجالات متعددة مثل تطوير الويب، الذكاء الاصطناعي، تحليل البيانات، وغيرها.</p>
+        
+        <h3>متغيرات Python</h3>
+        <p>في Python، لا حاجة ل объявл المتغيرات باستخدام كلمات مفتاحية خاصة:</p>
+        <pre><code># объявл متغير
+name = "أحمد"
+age = 25
+PI = 3.14
+
+print(name)  # أحمد
+print(age)   # 25</code></pre>
+
+        <h3>دوال Python</h3>
+        <p>تُستخدم الكلمة المفتاحية <code>def</code> لتعريف الدوال في Python:</p>
+        <pre><code>def welcome(name):
+    return f"مرحباً، {name}!"
+
+print(welcome("أحمد"))  # مرحباً، أحمد!</code></pre>
+
+        <h3>قوائم Python</h3>
+        <p>القوائم في Python تُستخدم لتخزين بيانات متعددة في متغير واحد:</p>
+        <pre><code>fruits = ["تفاح", "موز", "برتقال"]
+
+print(fruits[0])       # تفاح
+print(len(fruits))     # 3</code></pre>
+
+        <div class="note">
+            <strong>ملاحظة:</strong> Python تعتمد على المسافات البادئة (indentation) لتحديد كتل التعليمات البرمجية.
+        </div>
+
+        <h2>البرمجة الكائنية (OOP) في Python</h2>
+        <p>البرمجة الكائنية في Python تُستخدم لإنشاء كائنات وتنظيم الكود بطريقة منظمة:</p>
+        <pre><code>class Car:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+    
+    def start(self):
+        print(f"{self.brand} {self.model} قيد التشغيل")
+
+my_car = Car("Toyota", "Camry")
+my_car.start()  # Toyota Camry قيد التشغيل</code></pre>
+
+        <div class="warning">
+            <strong>تحذير:</strong> تأكد من فهمك للمسافات البادئة في Python لتجنب الأخطاء البرمجية.
+        </div>
+
+        <h2>الاستنتاج</h2>
+        <p>Python لغة قوية ومرنة تُستخدم في العديد من المجالات. مع الاستمرار في التعلم والممارسة، يمكنك إتقان هذه اللغة وبناء تطبيقات مذهلة.</p>
+    </div>
+
+    <script>
+        // التحقق من الوضع المظلم من localStorage
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
