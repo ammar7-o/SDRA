@@ -43,22 +43,7 @@ document.write(`
                 <div id="read-action-btn"><i class="fa-solid fa-angle-right"></i></div>
                 <div id="full-screen"><i class="fa-solid fa-expand"></i></div>
                 <div id="super-full-screen"> <i class="fa-solid fa-desktop"></i></div>
-                <div id="zoom-in"> <i class="fa-solid fa-magnifying-glass-plus"></i></div>
-                <div id="zoom-out"> <i class="fa-solid fa-magnifying-glass-minus"></i></div>
-                <div id="print-btn"> <i class="fa-solid fa-print"></i></div>
-                <div id="search-btn"> <i class="fa-solid fa-search"></i></div>
-                <div id="bookmarks-btn"> <i class="fa-solid fa-bookmark"></i></div>
-                <div id="toc-btn"> <i class="fa-solid fa-list"></i></div>
-                <div id="night-mode-btn"> <i class="fa-solid fa-moon"></i></div>
-                <div id="reader-mode-btn"> <i class="fa-solid fa-book-open"></i></div>
-                <div class="font-size-control-wrapper">
-                    <label for="font-size-control"><i class="fa-solid fa-text-height"></i></label>
-                    <input type="range" id="font-size-control" class="font-size-control" min="12" max="24" value="16">
-                </div>
-                <div class="line-height-control-wrapper">
-                    <label for="line-height-control"><i class="fa-solid fa-arrows-alt-v"></i></label>
-                    <input type="range" id="line-height-control" class="line-height-control" min="1" max="2" step="0.1" value="1.5">
-                </div>
+
             </div>
 
 
