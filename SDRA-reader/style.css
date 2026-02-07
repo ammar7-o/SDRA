@@ -534,31 +534,63 @@ aside::-webkit-scrollbar-thumb {
 
 .read-actions.open {
     width: fit-content;
+    flex-wrap: wrap;
+    padding: 10px;
 }
 
-.read-actions div {
-
+.read-actions div,
+.read-actions .font-size-control-wrapper,
+.read-actions .line-height-control-wrapper {
     padding: 10px;
     border-radius: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.read-actions .font-size-control-wrapper,
+.read-actions .line-height-control-wrapper {
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+}
+
+.read-actions input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+.read-actions label {
+    margin-bottom: 3px;
 }
 
 #read-action-btn i {
-
     transition: all 0.5s;
-
-
 }
 
 #read-action-btn.open i {
-
     transform: rotate(180deg);
-
-
 }
 
 .read-actions div:hover {
     background-color: var(--hover);
+}
+
+/* تصميم حديث للأزرار */
+.read-actions {
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.read-actions div {
+    transition: all 0.3s ease;
+}
+
+.read-actions div:hover {
+    transform: scale(1.1);
+    background-color: var(--primary-color);
+    color: white;
 }
 
 /* افتراضياً على الشاشات الصغيرة، اخفاء sidebar */
