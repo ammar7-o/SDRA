@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React - مدونة SDRA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2e7d32;
+            --background: #f8f9fa;
+            --header: #ffffff;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --background: #0f172a;
+            --header: #020617;
+            --text-color: #e5e7eb;
+            --card-bg: #1e293b;
+            --border-color: #374151;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-right: 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background-color: rgba(46, 125, 50, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            direction: ltr;
+        }
+
+        pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .note {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-right: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-right: 4px solid var(--danger);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="../../font-awesome/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>React - من الصفر إلى الاحتراف</h1>
+        
+        <h2>مقدمة في React</h2>
+        <p>React هو مكتبة JavaScript مفتوحة المصدر تُستخدم لبناء واجهات المستخدم (UI). تم تطويره من قبل Facebook ويُستخدم على نطاق واسع في بناء تطبيقات الويب التفاعلية.</p>
+        
+        <h3>مكون بسيط في React</h3>
+        <p>في React، يتم إنشاء المكونات باستخدام دوال أو فئات:</p>
+        <pre><code>import React from 'react';
+
+function Welcome(props) {
+  return &lt;h1&gt;مرحباً، {props.name}&lt;/h1&gt;;
+}
+
+export default Welcome;</code></pre>
+
+        <h3>حالة المكون (State)</h3>
+        <p>تُستخدم الحالة لتخزين المعلومات التي يمكن أن تتغير داخل المكون:</p>
+        <pre><code>import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;العداد: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        ارفع العداد
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+        <h3>ال Life Cycle Hooks</h3>
+        <p>تُستخدم hooks لتنفيذ المهام عند نقاط مختلفة في دورة حياة المكون:</p>
+        <pre><code>import React, { useState, useEffect } from 'react';
+
+function MyComponent() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // تُنفذ بعد التصيير
+    fetchData().then(setData);
+  }, []);
+
+  return &lt;div&gt;...&lt;/div&gt;;
+}</code></pre>
+
+        <div class="note">
+            <strong>ملاحظة:</strong> React يعتمد على Virtual DOM لتحسين الأداء.
+        </div>
+
+        <h2>نظام إدارة الحالة (Redux)</h2>
+        <p>Redux هو أداة إدارة حالة مصممة لتطبيقات JavaScript:</p>
+        <pre><code>// action
+const increment = () => ({ type: 'INCREMENT' });
+
+// reducer
+const counterReducer = (state = 0, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    default:
+      return state;
+  }
+};</code></pre>
+
+        <div class="warning">
+            <strong>تحذير:</strong> لا تستخدم Redux لكل مشروع، فقط عند الحاجة لإدارة حالة معقدة.
+        </div>
+
+        <h2>الاستنتاج</h2>
+        <p>React أداة قوية لبناء واجهات مستخدم تفاعلية. مع الاستمرار في التعلم والممارسة، يمكنك إتقان هذه التقنية وبناء تطبيقات مذهلة.</p>
+    </div>
+
+    <script>
+        // التحقق من الوضع المظلم من localStorage
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

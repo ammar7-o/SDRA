@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript - مدونة SDRA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2e7d32;
+            --background: #f8f9fa;
+            --header: #ffffff;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --background: #0f172a;
+            --header: #020617;
+            --text-color: #e5e7eb;
+            --card-bg: #1e293b;
+            --border-color: #374151;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-right: 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background-color: rgba(46, 125, 50, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            direction: ltr;
+        }
+
+        pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .note {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-right: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-right: 4px solid var(--danger);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="../../font-awesome/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript - من الصفر إلى الاحتراف</h1>
+        
+        <h2>مقدمة في JavaScript</h2>
+        <p>JavaScript هي لغة برمجة نصية تُستخدم لجعل صفحات الويب تفاعلية. تُعد واحدة من اللغات الأساسية في تطوير الويب الحديث.</p>
+        
+        <h3>متغيرات JavaScript</h3>
+        <p>في JavaScript، تُستخدم الكلمات المفتاحية <code>var</code> و <code>let</code> و <code>const</code> ل объявл المتغيرات:</p>
+        <pre><code>// объявл متغير باستخدام var
+var name = "أحمد";
+
+// объявл متغير باستخدام let
+let age = 25;
+
+// объявл ثابت باستخدام const
+const PI = 3.14;</code></pre>
+
+        <h3>دوال JavaScript</h3>
+        <p>الدوال تُستخدم لتعبئة مجموعة من التعليمات البرمجية التي يمكن استدعاؤها عدة مرات:</p>
+        <pre><code>function welcome(name) {
+    return "مرحباً، " + name + "!";
+}
+
+console.log(welcome("أحمد")); // مرحباً، أحمد!</code></pre>
+
+        <h3>مصفوفات JavaScript</h3>
+        <p>المصفوفة هي كائن يُستخدم لتخزين بيانات متعددة في متغير واحد:</p>
+        <pre><code>let fruits = ["تفاح", "موز", "برتقال"];
+
+console.log(fruits[0]); // تفاح
+console.log(fruits.length); // 3</code></pre>
+
+        <div class="note">
+            <strong>ملاحظة:</strong> JavaScript حساسة لحالة الأحرف، مما يعني أن <code>myVariable</code> و <code>myvariable</code> هما متغيران مختلفان.
+        </div>
+
+        <h2>البرمجة الكائنية (OOP) في JavaScript</h2>
+        <p>البرمجة الكائنية في JavaScript تُستخدم لإنشاء كائنات وتنظيم الكود بطريقة منظمة:</p>
+        <pre><code>class Car {
+    constructor(brand, model) {
+        this.brand = brand;
+        this.model = model;
+    }
+
+    start() {
+        console.log(this.brand + " " + this.model + " قيد التشغيل");
+    }
+}
+
+let myCar = new Car("Toyota", "Camry");
+myCar.start(); // Toyota Camry قيد التشغيل</code></pre>
+
+        <div class="warning">
+            <strong>تحذير:</strong> تأكد من التحقق من وجود العناصر قبل التفاعل معها لتجنب الأخطاء البرمجية.
+        </div>
+
+        <h2>الاستنتاج</h2>
+        <p>JavaScript لغة قوية ومرنة تُستخدم في تطوير الواجهات الأمامية والخوادم. مع الاستمرار في التعلم والممارسة، يمكنك إتقان هذه اللغة وبناء تطبيقات مذهلة.</p>
+    </div>
+
+    <script>
+        // التحقق من الوضع المظلم من localStorage
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
