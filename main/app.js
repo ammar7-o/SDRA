@@ -6,6 +6,10 @@ let overlay;
 let ToogleTheme;
 let cards;
 let searchInput;
+let languageSelect;
+let decreaseFontBtn;
+let increaseFontBtn;
+let resetFontBtn;
 
 // ----- الوضع الداكن -----
 function SwitchToDarkMode() {
@@ -14,6 +18,54 @@ function SwitchToDarkMode() {
     ToogleTheme.innerHTML = isDark
         ? `<i class="fas fa-sun"></i>`
         : `<i class="fas fa-moon"></i>`;
+}
+
+// ----- تغيير اللغة -----
+function switchLanguage() {
+    const lang = languageSelect.value;
+    localStorage.setItem('language', lang);
+    
+    // تحديث لغة الصفحة
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    // تحديث النصوص وفقًا للغة
+    updateTexts(lang);
+}
+
+// ----- تحديث النصوص -----
+function updateTexts(lang) {
+    if (lang === 'ar') {
+        // تحديث النصوص إلى العربية
+        document.querySelector('.logo span').textContent = 'مدونة SDRA';
+        document.querySelector('main h1').textContent = '      مدونة SDRA  ';
+        document.querySelector('main p').innerHTML = `<i class="fa-solid fa-lightbulb"></i> مدونة تحتوي على العديد من الملخصات للمواضيع المختلفة، من الصفر إلى الاحتراف`;
+        document.querySelector('form input').placeholder = 'ابحث عن مواضيع...';
+    } else {
+        // تحديث النصوص إلى الإنجليزية
+        document.querySelector('.logo span').textContent = 'SDRA Wiki';
+        document.querySelector('main h1').textContent = '      SDRA Wiki  ';
+        document.querySelector('main p').innerHTML = `<i class="fa-solid fa-lightbulb"></i> A wiki with many summaries for different things, from zero to hero`;
+        document.querySelector('form input').placeholder = 'Search topics...';
+    }
+}
+
+// ----- التحكم في حجم الخط -----
+function adjustFontSize(factor) {
+    const currentSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const newSize = currentSize + factor;
+    
+    // تأكد من أن الحجم لا يخرج عن الحدود المعقولة
+    if (newSize >= 12 && newSize <= 24) {
+        document.documentElement.style.fontSize = newSize + 'px';
+        localStorage.setItem('fontSize', newSize);
+    }
+}
+
+// ----- تعيين حجم الخط -----
+function setFontSize(size) {
+    document.documentElement.style.fontSize = size + 'px';
+    localStorage.setItem('fontSize', size);
 }
 
 // ----- إعدادات النافذة المنبثقة -----
@@ -60,24 +112,45 @@ window.addEventListener('DOMContentLoaded', () => {
     ToogleTheme = document.querySelector(".toogle-theme");
     cards = document.getElementById("cards");
     searchInput = document.querySelector("form input");
+    languageSelect = document.getElementById("language-select");
+    decreaseFontBtn = document.getElementById("decrease-font");
+    increaseFontBtn = document.getElementById("increase-font");
+    resetFontBtn = document.getElementById("reset-font");
 
     // أحداث
     if (SettingsBtn) SettingsBtn.addEventListener("click", openSettings);
     if (overlay) overlay.addEventListener("click", openSettings);
     if (ToogleTheme) ToogleTheme.addEventListener("click", SwitchToDarkMode);
+    if (languageSelect) languageSelect.addEventListener("change", switchLanguage);
+    if (decreaseFontBtn) decreaseFontBtn.addEventListener("click", () => adjustFontSize(-1));
+    if (increaseFontBtn) increaseFontBtn.addEventListener("click", () => adjustFontSize(1));
+    if (resetFontBtn) resetFontBtn.addEventListener("click", () => setFontSize(16));
     if (searchInput) {
         searchInput.addEventListener("input", (e) => renderContent(e.target.value));
     }
 
     document.querySelector("form").addEventListener("submit", e => e.preventDefault());
 
-    // تحميل الوضع الداكن من localStorage
+    // تحميل الإعدادات من localStorage
     const darkMode = localStorage.getItem('darkMode') === 'true';
     if (darkMode) {
         document.body.classList.add('dark-mode');
         ToogleTheme.innerHTML = `<i class="fas fa-sun"></i>`;
     } else {
         ToogleTheme.innerHTML = `<i class="fas fa-moon"></i>`;
+    }
+    
+    // تحميل اللغة من localStorage
+    const savedLang = localStorage.getItem('language');
+    if (savedLang) {
+        languageSelect.value = savedLang;
+        switchLanguage();
+    }
+    
+    // تحميل حجم الخط من localStorage
+    const savedFontSize = localStorage.getItem('fontSize');
+    if (savedFontSize) {
+        setFontSize(savedFontSize);
     }
 
     // عرض الكروت عند التحميل
