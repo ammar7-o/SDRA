@@ -8,7 +8,9 @@ document.write(`
     <title>SDRA Wiki</title>
     <link rel="stylesheet" href="../../SDRA-reader/style.css">
     <link rel="stylesheet" href="../../font-awesome/css/all.min.css">
-
+<!-- في head -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 </head>
 

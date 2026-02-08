@@ -13,19 +13,15 @@ const readActionBtn = document.getElementById("read-action-btn");
 const superFullScreen = document.getElementById("super-full-screen");
 const aside = document.querySelector("aside");
 const file = document.querySelector(".list a");
-const downloadBtn = document.getElementById("download-btn");
 
 const asideBtn = document.querySelector(".aside-btn");
 const fontSizeControl = document.querySelector(".font-size-control");
-const lineHeightControl = document.querySelector(".line-height-control");
+
 const zoomInBtn = document.querySelector("#zoom-in");
 const zoomOutBtn = document.querySelector("#zoom-out");
-const printBtn = document.querySelector("#print-btn");
-const searchBtn = document.querySelector("#search-btn");
-const bookmarksBtn = document.querySelector("#bookmarks-btn");
-const tocBtn = document.querySelector("#toc-btn");
-const nightModeBtn = document.querySelector("#night-mode-btn");
-const readerModeBtn = document.querySelector("#reader-mode-btn");
+
+
+
 
 // ----- تحميل المحتوى داخل iframe -----
 function SetIframeSrc(src) {
@@ -55,7 +51,7 @@ function setupAutoLinks() {
 }
 // ----- مستمع عام لكل روابط data-src أو href مع ?key= -----
 function setupDataSrcLinks() {
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         const link = e.target.closest('a');
         if (!link) return;
 
@@ -92,7 +88,7 @@ function loadThemeState() {
 // ----- عرض الوضع الداكن -----
 function renderTheme() {
     document.body.classList.toggle("dark-mode", isDarkMode);
-    
+
     if (ToogleTheme) {
         ToogleTheme.innerHTML = isDarkMode
             ? `<i class="fas fa-sun"></i>`
@@ -155,8 +151,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // تحميل وعرض الوضع الداكن
     loadThemeState();
     renderTheme();
-        setupSidebarLinks(); 
-    
+    setupSidebarLinks();
+
     // إضافة مستمعي الأحداث للوظائف الإضافية
     initializeReaderFeatures();
 });
@@ -165,211 +161,65 @@ window.addEventListener('DOMContentLoaded', () => {
 function initializeReaderFeatures() {
     // التحكم في حجم الخط
     if (fontSizeControl) {
-        fontSizeControl.addEventListener('change', function() {
+        fontSizeControl.addEventListener('change', function () {
             const fontSize = this.value;
             updateIframeStyle(`body { font-size: ${fontSize}px !important; }`);
         });
     }
 
-    // التحكم في تباعد الأسطر
-    if (lineHeightControl) {
-        lineHeightControl.addEventListener('change', function() {
-            const lineHeight = this.value;
-            updateIframeStyle(`body { line-height: ${lineHeight} !important; }`);
-        });
-    }
 
     // تكبير/تصغير العرض
     if (zoomInBtn) {
-        zoomInBtn.addEventListener('click', function() {
-            zoomIframe(0.1);
+        zoomInBtn.addEventListener('click', function () {
+            zoomIframe(0.4);
         });
     }
-    
+
     if (zoomOutBtn) {
-        zoomOutBtn.addEventListener('click', function() {
-            zoomIframe(-0.1);
+        zoomOutBtn.addEventListener('click', function () {
+            zoomIframe(-0.4);
         });
     }
 
-    // الطباعة
-    if (printBtn) {
-        printBtn.addEventListener('click', function() {
-            printIframeContent();
-        });
-    }
 
-    // البحث
-    if (searchBtn) {
-        searchBtn.addEventListener('click', function() {
-            searchInIframe();
-        });
-    }
 
-    // الإشارات المرجعية
-    if (bookmarksBtn) {
-        bookmarksBtn.addEventListener('click', function() {
-            toggleBookmarks();
-        });
-    }
 
-    // جدول المحتويات
-    if (tocBtn) {
-        tocBtn.addEventListener('click', function() {
-            generateTableOfContents();
-        });
-    }
-
-    // الوضع الليلي
-    if (nightModeBtn) {
-        nightModeBtn.addEventListener('click', function() {
-            toggleNightMode();
-        });
-    }
-
-    // وضع القارئ
-    if (readerModeBtn) {
-        readerModeBtn.addEventListener('click', function() {
-            toggleReaderMode();
-        });
-    }
 }
 
-// دالة تحديث نمط iframe
-function updateIframeStyle(css) {
-    const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
-    if (iframeDoc) {
-        let style = iframeDoc.getElementById('dynamic-style');
-        if (!style) {
-            style = iframeDoc.createElement('style');
-            style.id = 'dynamic-style';
-            iframeDoc.head.appendChild(style);
-        }
-        style.textContent = css;
-    }
-}
 
-// دالة تكبير/تصغير iframe
 function zoomIframe(factor) {
-    const currentZoom = parseFloat(IFRAME.style.zoom) || 1;
+    const body =
+        IFRAME.contentDocument?.body ||
+        IFRAME.contentWindow?.document?.body;
+
+    if (!body) return;
+
+    const currentZoom = parseFloat(body.style.zoom) || 1;
     const newZoom = Math.max(0.5, Math.min(2, currentZoom + factor));
-    IFRAME.style.zoom = newZoom;
-}
 
-// دالة طباعة محتوى iframe
-function printIframeContent() {
-    const iframeDoc = IFRAME.contentWindow;
-    iframeDoc.focus();
-    iframeDoc.print();
-}
+    body.style.zoom = newZoom;
 
-// دالة البحث في iframe
-function searchInIframe() {
-    const searchTerm = prompt("أدخل كلمة البحث:");
-    if (searchTerm) {
-        const iframeWin = IFRAME.contentWindow;
-        iframeWin.find(searchTerm);
+    // استثناء read-actions
+    const readActions = body.querySelector('.read-actions');
+    if (readActions) {
+        readActions.style.zoom = 1 / newZoom;
     }
-}
-
-// دالة الإشارات المرجعية
-function toggleBookmarks() {
-    alert("ميزة الإشارات المرجعية قيد التطوير");
-}
-
-// دالة جدول المحتويات
-function generateTableOfContents() {
-    const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
-    if (iframeDoc) {
-        const headings = iframeDoc.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        if (headings.length > 0) {
-            let tocHtml = '<div class="toc"><h3>جدول المحتويات</h3><ul>';
-            headings.forEach((heading, index) => {
-                const level = parseInt(heading.tagName.charAt(1));
-                const indent = '  '.repeat(level - 1);
-                tocHtml += `${indent}<li><a href="#" data-heading="${index}">${heading.textContent}</a></li>`;
-            });
-            tocHtml += '</ul></div>';
-            
-            // إنشاء نافذة منبثقة لجدول المحتويات
-            const tocWindow = window.open('', 'TOC', 'width=400,height=600');
-            tocWindow.document.write(`
-                <html>
-                <head>
-                    <title>جدول المحتويات</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; padding: 20px; }
-                        .toc ul { list-style-type: none; padding-left: 20px; }
-                        .toc li { margin: 5px 0; }
-                        .toc a { text-decoration: none; color: #2e7d32; display: block; padding: 5px; }
-                        .toc a:hover { background-color: #e0e0e0; }
-                    </style>
-                </head>
-                <body>${tocHtml}</body>
-                </html>
-            `);
-            tocWindow.document.close();
-        } else {
-            alert("لا توجد عناوين في هذه الصفحة");
-        }
+    const toc = body.querySelector('.toc-sidebar');
+    if (toc) {
+        toc.style.zoom = 1 / newZoom;
     }
+
 }
 
-// دالة التبديل إلى الوضع الليلي
-function toggleNightMode() {
-    const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
-    if (iframeDoc) {
-        const existingStyle = iframeDoc.getElementById('night-mode-style');
-        if (existingStyle) {
-            existingStyle.remove();
-        } else {
-            const nightModeStyle = iframeDoc.createElement('style');
-            nightModeStyle.id = 'night-mode-style';
-            nightModeStyle.textContent = `
-                body, * {
-                    background-color: #1a1a1a !important;
-                    color: #e0e0e0 !important;
-                    border-color: #555 !important;
-                }
-                img, video {
-                    opacity: 0.8;
-                }
-            `;
-            iframeDoc.head.appendChild(nightModeStyle);
-        }
-    }
-}
 
-// دالة تبديل وضع القارئ
-function toggleReaderMode() {
-    const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
-    if (iframeDoc) {
-        const existingStyle = iframeDoc.getElementById('reader-mode-style');
-        if (existingStyle) {
-            existingStyle.remove();
-        } else {
-            const readerModeStyle = iframeDoc.createElement('style');
-            readerModeStyle.id = 'reader-mode-style';
-            readerModeStyle.textContent = `
-                * {
-                    font-family: Georgia, 'Times New Roman', serif !important;
-                    max-width: 800px !important;
-                    margin: 0 auto !important;
-                    padding: 20px !important;
-                }
-                body {
-                    background-color: #f5f5dc !important;
-                    color: #333 !important;
-                }
-                img, iframe, .ads {
-                    display: none !important;
-                }
-            `;
-            iframeDoc.head.appendChild(readerModeStyle);
-        }
-    }
-}
-function openAside(){
+
+
+
+
+
+
+
+function openAside() {
     aside.classList.toggle("open")
 }
 // ----- إضافة مستمعي الأحداث -----
@@ -380,7 +230,6 @@ if (readActionBtn) readActionBtn.addEventListener("click", openReadActions);
 if (fullScreen) fullScreen.addEventListener("click", ToogleFullScreen);
 if (superFullScreen) superFullScreen.addEventListener("click", SuperToogleFullScreen);
 if (asideBtn) asideBtn.addEventListener("click", openAside);
-if (downloadBtn) downloadBtn.addEventListener("click", downloadCurrentPage);
 
 function setupSidebarLinks() {
     const sidebarLinks = document.querySelectorAll('.list details a');
@@ -388,122 +237,14 @@ function setupSidebarLinks() {
     sidebarLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             // إغلاق القائمة على الشاشات الصغيرة
-            
-                aside.classList.remove("open");
-            
+
+            aside.classList.remove("open");
+
         });
     });
 }
 
-// ----- دالة تحميل الصفحة -----
-async function downloadCurrentPage() {
-    try {
-        // تحديد نوع الملف من الإعدادات
-        const fileTypeSelect = document.getElementById('file-type-select');
-        const fileType = fileTypeSelect ? fileTypeSelect.value : 'pdf';
-        
-        if (fileType === 'pdf') {
-            await downloadAsPdf();
-        } else if (fileType === 'html') {
-            downloadAsHtml();
-        } else if (fileType === 'txt') {
-            downloadAsTxt();
-        }
-    } catch (error) {
-        console.error('Error downloading page:', error);
-        alert('حدث خطأ أثناء تحميل الصفحة');
-    }
-}
-
-// ----- تحميل كملف PDF -----
-async function downloadAsPdf() {
-    // استخدام مكتبة jsPDF إذا كانت متوفرة
-    if (typeof jsPDF !== 'undefined') {
-        const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
-        const iframeBody = iframeDoc.body;
-        
-        // إنشاء نسخة من محتوى iframe لتحويلها إلى PDF
-        const element = iframeDoc.cloneNode(true);
-        
-        // إنشاء مستند PDF جديد
-        const doc = new jsPDF();
-        
-        // تحويل المحتوى إلى PDF (هذا يتطلب مكتبة html2canvas)
-        if (typeof html2canvas !== 'undefined') {
-            const canvas = await html2canvas(element.body);
-            const imgData = canvas.toDataURL('image/png');
-            const imgWidth = 210;
-            const pageHeight = 295;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
-
-            doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-
-            while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
-                doc.addPage();
-                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-            }
-            
-            // حفظ ملف PDF
-            doc.save('page-content.pdf');
-        } else {
-            // إذا لم تكن متوفرة، نستخدم وظيفة الطباعة
-            printIframeContent();
-        }
-    } else {
-        // تنبيه للمستخدم لتنزيل المكونات المطلوبة
-        alert('يرجى زيارة صفحة التنزيلات للحصول على الملف');
-        printIframeContent();
-    }
-}
-
-// ----- تحميل كملف HTML -----
-function downloadAsHtml() {
-    const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
-    const iframeHtml = iframeDoc.documentElement.outerHTML;
-    
-    const blob = new Blob([iframeHtml], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'page-content.html';
-    document.body.appendChild(a);
-    a.click();
-    
-    // تنظيف
-    setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, 100);
-}
-
-// ----- تحميل كملف نصي -----
-function downloadAsTxt() {
-    const iframeDoc = IFRAME.contentDocument || IFRAME.contentWindow.document;
-    const iframeText = iframeDoc.body.innerText || iframeDoc.body.textContent;
-    
-    const blob = new Blob([iframeText], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'page-content.txt';
-    document.body.appendChild(a);
-    a.click();
-    
-    // تنظيف
-    setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, 100);
-}
-
- setupSidebarLinks(); 
+setupSidebarLinks();
 // ----- دعم زر الرجوع في المتصفح -----
 window.addEventListener('popstate', () => {
     const params = new URLSearchParams(window.location.search);

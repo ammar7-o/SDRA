@@ -7,7 +7,7 @@
     --settings: #e5e7eb;
     --iframe: #ffffff;
     --hover: #a5a5a5;
-
+    --read-line-height: 1.6;
 }
 
 .dark-mode {
@@ -18,29 +18,289 @@
     --settings: #020617;
     --iframe: #020617;
     --hover: #575757;
+
 }
 
 * {
 
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1.2em;
+    font-family: sans-serif;
+
 }
 
-html{
+
+
+html {
     padding-top: 30px;
+    position: relative;
+
 }
+
 body {
+    padding: 0px 20px;
     padding-top: 30px;
     color: var(--text-color);
     font-family: sans-serif;
+    line-height: var(--read-line-height);
+
 }
-.rtl{
+
+/* ============================= */
+/* Read Actions Container */
+.read-actions {
+    width: 56px;
+    height: 40px;
+    padding: 6px;
+    position: fixed;
+    top: 0px;
+    right: 8px;
+    z-index: 50;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #21212131;
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: width 0.4s ease, padding 0.4s ease;
+    line-height: normal !important;
+}
+
+/* Open State */
+.read-actions.open {
+    height: 300px;
+    flex-wrap: wrap;
+
+}
+
+/* ============================= */
+/* Buttons */
+.read-actions>div,
+.font-size-control-wrapper,
+.line-height-control-wrapper {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+/* Hover */
+.read-actions>div:hover,
+.font-size-control-wrapper:hover,
+.line-height-control-wrapper:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: scale(1.08);
+}
+
+/* ============================= */
+/* Arrow Button */
+#read-action-btn i {
+    transition: transform 0.4s ease;
+}
+
+#read-action-btn i {
+    transform: rotate(90deg);
+}
+
+#read-action-btn.open i {
+    transform: rotate(270deg);
+}
+
+/* ============================= */
+/* Range Controls */
+.font-size-control-wrapper,
+.line-height-control-wrapper {
+    width: 100%;
+    height: auto;
+    padding: 6px;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.read-actions input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+.read-actions label {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.toc-sidebar {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100vh;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    z-index: 100;
+
+    padding: 15px;
+    overflow-y: auto;
+    transition: right 0.4s ease;
+}
+
+.toc-sidebar.open {
+    right: 0;
+}
+
+.toc-sidebar h3 {
+    margin-bottom: 10px;
+}
+
+#toc-list {
+    list-style: none;
+    padding: 0;
+}
+
+#toc-list li {
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+#toc-list li:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.toc-close-btn {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toc-close-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+#toc-list li {
+    position: relative;
+    padding-left: 10px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+#toc-list li.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+}
+
+#toc-list li.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 4px;
+    height: 60%;
+    background: var(--primary-color);
+    transform: translateY(-50%);
+    border-radius: 2px;
+}
+
+/* ============================= */
+/* Print Mode */
+@media print {
+
+    /* إخفاء شريط الأدوات */
+    .read-actions,
+    .toc-sidebar,
+    #toc-btn,
+    #search-btn,
+    #print-btn {
+        display: none !important;
+    }
+
+    body::before {
+        content: "SDRA Wiki";
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    /* إزالة أي هوامش أو خلفيات غير ضرورية */
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    /* تحسين النص للطباعة */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    /* منع قص المحتوى */
+    html,
+    body {
+        overflow: visible !important;
+        height: auto !important;
+    }
+}
+
+.rtl {
     direction: rtl;
 }
-.ltr{
+
+.ltr {
     direction: ltr;
 
 }
-.center{
+
+.center {
     text-align: center;
+}
+
+/* استثناء Table of Contents من تغييرات القراءة */
+.toc-sidebar,
+.toc-sidebar * {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+
+@media (max-width: 768px) {
+    .read-actions {
+        top: auto;
+        /* 👈 مهم جدًا */
+        bottom: 0px;
+
+    }
+
+    #read-action-btn i {
+        transform: rotate(-90deg);
+    }
+
+    #read-action-btn.open i {
+        transform: rotate(-270deg);
+    }
+
 }

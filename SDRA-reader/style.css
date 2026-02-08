@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Tajawal', sans-serif;
+    font-family: sans-serif;
 }
 
 :root {
@@ -53,10 +53,10 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 2px;
+    padding: 15px 10px;
     border-bottom: 2px gray solid;
     flex-wrap: wrap;
-    gap: 15px;
+
 }
 
 header .logo {
@@ -80,23 +80,25 @@ header nav ul {
     justify-content: center;
 }
 
-header nav ul a {
+header a {
     text-decoration: none;
     color: var(--text-color);
     padding: 8px 12px;
     border-radius: 6px;
     transition: background-color 0.3s;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
-header nav ul a:hover {
-    background-color: var(--primary-color);
+header a:hover {
+    background-color: rgba(128, 128, 128, 0.425);
     color: white;
 }
 
 header .settings i {
     color: var(--text-color);
     font-size: 22px;
-    padding: 8px;
     border-radius: 50%;
     transition: background-color 0.3s;
 }
@@ -234,9 +236,11 @@ iframe {
     animation-direction: initial;
     display: none;
 }
-.aside-btn:hover{
-     background-color: var(--hover);
+
+.aside-btn:hover {
+    background-color: var(--hover);
 }
+
 .head {
     display: flex;
     align-items: center;
@@ -291,16 +295,6 @@ iframe {
     background-color: rgba(128, 128, 128, 0.2);
     border-radius: 8px;
     border: 1px solid rgba(128, 128, 128, 0.3);
-}
-
-.file-type-select {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background-color: var(--input);
-    color: var(--text-color);
-    font-size: 1rem;
-    outline: none;
 }
 
 .settings-overlay a {
@@ -525,7 +519,7 @@ aside::-webkit-scrollbar-thumb {
 }
 
 .read-actions {
-    width: 70px;
+    width: 55px;
     height: fit-content;
     padding: 5px;
     position: absolute;
@@ -534,9 +528,9 @@ aside::-webkit-scrollbar-thumb {
     z-index: 50;
     display: flex;
     align-items: center;
-    background-color: #21212157;
+    background-color: #21212131;
     border-radius: 10px;
-    gap: 9px;
+    gap: 6px;
     overflow: hidden;
     transition: all 0.5s;
     animation-direction: initial;
@@ -545,9 +539,13 @@ aside::-webkit-scrollbar-thumb {
 .read-actions.open {
     width: fit-content;
     flex-wrap: wrap;
-    padding: 10px;
-}
 
+}
+#exit{
+    padding: 5px 15px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
 .read-actions div,
 .read-actions .font-size-control-wrapper,
 .read-actions .line-height-control-wrapper {
@@ -610,7 +608,7 @@ aside::-webkit-scrollbar-thumb {
     }
 
     aside {
-        transform: translateX(-100%);
+        transform: translateX(0);
         /* مخفي عن الشاشة */
         position: fixed;
         top: 50px;
@@ -623,7 +621,8 @@ aside::-webkit-scrollbar-thumb {
     }
 
     aside.open {
-        transform: translateX(0);
+        transform: translateX(-100%);
+
         /* يظهر عند الضغط */
     }
 
@@ -641,5 +640,9 @@ aside::-webkit-scrollbar-thumb {
 
     .overlay-aside.active {
         display: block;
+    }
+
+    #full-screen {
+        display: none;
     }
 }
