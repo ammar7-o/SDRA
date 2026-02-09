@@ -528,7 +528,7 @@ aside::-webkit-scrollbar-thumb {
     height: fit-content;
     padding: 5px;
     position: absolute;
-    top: 5px;
+    top: 0px;
     left: 5px;
     z-index: 50;
     display: flex;
@@ -583,6 +583,8 @@ aside::-webkit-scrollbar-thumb {
 
 #read-action-btn i {
     transition: all 0.5s;
+    font-size: 1.4em;
+    opacity: 0.4;
 }
 
 #read-action-btn.open i {

@@ -28,7 +28,7 @@ function SetIframeSrc(src) {
     const newUrl = `${window.location.pathname}?key=${encodedSrc}`;
     window.history.pushState({ path: newUrl }, '', newUrl);
     IFRAME.src = decodedSrc;
-    openAside()
+        if (aside) aside.classList.remove("open");
 }
 
 // ----- إعداد الروابط التلقائية -----
@@ -138,6 +138,8 @@ function SuperToogleFullScreen() {
 
 // ----- عند تحميل الصفحة -----
 window.addEventListener('DOMContentLoaded', () => {
+        aside.classList.remove("open")
+
     // تحميل محتوى الـiframe إذا كان موجود في الرابط
     const params = new URLSearchParams(window.location.search);
     const key = params.get('key');

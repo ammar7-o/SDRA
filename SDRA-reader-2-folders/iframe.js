@@ -7,6 +7,7 @@ document.body.innerHTML += `
 <link rel="stylesheet" href="../../../main/cta-framework.css">
 <link rel="stylesheet" href="../../../font-awesome/css/all.min.css">
 <script src="../../../settings.js"></script>
+<div class="header"></div>
 
 <div class="read-actions">
     <div id="read-action-btn"><i class="fa-solid fa-angle-right"></i></div>
@@ -156,6 +157,31 @@ document.getElementById("zoom-in")?.addEventListener("click", () => changeFontSi
 document.getElementById("zoom-out")?.addEventListener("click", () => changeFontSize(-0.1));
 
 
+document.addEventListener("click", function (e) {
+    const img = e.target.closest(".zoomable-img");
+    if (!img) return;
+
+    const overlay = document.createElement("div");
+    overlay.className = "image-zoom-overlay";
+
+    const zoomedImg = document.createElement("img");
+    zoomedImg.src = img.src;
+
+    const closeBtn = document.createElement("div");
+    closeBtn.className = "image-zoom-close";
+    closeBtn.innerHTML = "&times;";
+
+    overlay.appendChild(zoomedImg);
+    overlay.appendChild(closeBtn);
+    document.body.appendChild(overlay);
+
+    function closeZoom() {
+        overlay.remove();
+    }
+
+    overlay.addEventListener("click", closeZoom);
+    closeBtn.addEventListener("click", closeZoom);
+});
 /* ================== Init ================== */
 window.addEventListener("DOMContentLoaded", () => {
     renderMarkdown();
