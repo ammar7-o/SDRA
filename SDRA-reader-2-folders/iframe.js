@@ -4,9 +4,9 @@ const IS_FILE = location.protocol === "file:";
 /* ================== Inject UI ================== */
 document.body.innerHTML += `
 
-<link rel="stylesheet" href="../../main/cta-framework.css">
-<link rel="stylesheet" href="../../font-awesome/css/all.min.css">
-<script src="../../settings.js"></script>
+<link rel="stylesheet" href="../../../main/cta-framework.css">
+<link rel="stylesheet" href="../../../font-awesome/css/all.min.css">
+<script src="../../../settings.js"></script>
 
 <div class="read-actions">
     <div id="read-action-btn"><i class="fa-solid fa-angle-right"></i></div>

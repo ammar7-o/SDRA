@@ -29,6 +29,7 @@ const content = [
     { name: "CSS", src: "Root/css/Areader.html" },
     { name: "JS", src: "Root/js/Areader.html" },
     { name: "LINUX", src: "Root/linux/Areader.html" },
+     { name: "1bac-AR", src: "Root/1BACSEF/AR/Areader.html" },
 ];
 
 function renderContent(filter = "") {

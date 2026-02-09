@@ -6,8 +6,8 @@ document.write(`
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SDRA Wiki</title>
-    <link rel="stylesheet" href="../../SDRA-reader/style.css">
-    <link rel="stylesheet" href="../../font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="../../../SDRA-reader/style.css">
+    <link rel="stylesheet" href="../../../font-awesome/css/all.min.css">
 
 </head>
 </head>
@@ -19,7 +19,7 @@ document.write(`
         <aside>
             <header>
                 <div class="logo">
-                    <img src="../../icon.png" alt="" class="icon">
+                    <img src="../../../icon.png" alt="" class="icon">
                     <span>SDRA Wiki</span>
                 </div>
 
@@ -27,7 +27,7 @@ document.write(`
 
             </header>
             <div class="actions">
-                <a id="exit" href="../../index.html">Exit</a>
+                <a id="exit" href="../../../index.html">Exit</a>
             </div>
              <div class="list">
             </div>
@@ -65,9 +65,9 @@ document.write(`
     <div class="overlay"></div>
 </body>
 
-<script src="../../settings.js"></script>
+<script src="../../../settings.js"></script>
 
-<script src="../../SDRA-reader/app.js"></script>
+<script src="../../../SDRA-reader/app.js"></script>
 
 
 </html>

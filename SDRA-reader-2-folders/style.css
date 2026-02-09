@@ -144,7 +144,6 @@ details {
     padding: 12px;
     border-radius: 10px;
     gap: 8px;
-    margin-top: 7px;
 
 }
 
@@ -285,11 +284,9 @@ iframe {
 .overlay.open {
     display: block;
 }
-
-.list-o {
+.list-o{
     display: none;
 }
-
 .settings-overlay .item {
     width: 100%;
     margin: 10px 0;
@@ -544,16 +541,14 @@ aside::-webkit-scrollbar-thumb {
 .read-actions.open {
     width: fit-content;
     flex-wrap: wrap;
-
+    
 
 }
-
-#exit {
+#exit{
     padding: 5px 15px;
     background-color: var(--primary-color);
     border-radius: 10px;
 }
-
 .read-actions div,
 .read-actions .font-size-control-wrapper,
 .read-actions .line-height-control-wrapper {
@@ -616,8 +611,7 @@ aside::-webkit-scrollbar-thumb {
     }
 
     aside {
-        transform: translateX(-100%);
-
+        transform: translateX(0);
         /* مخفي عن الشاشة */
         position: fixed;
         top: 50px;
@@ -630,7 +624,8 @@ aside::-webkit-scrollbar-thumb {
     }
 
     aside.open {
-        transform: translateX(0);
+        transform: translateX(-100%);
+
         /* يظهر عند الضغط */
     }
 
