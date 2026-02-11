@@ -6,6 +6,8 @@ document.body.innerHTML += `
 
 <link rel="stylesheet" href="../../main/cta-framework.css">
 <link rel="stylesheet" href="../../font-awesome/css/all.min.css">
+<link rel="stylesheet" href="../../../main/cta-framework.css">
+<link rel="stylesheet" href="../../../font-awesome/css/all.min.css">
 <script src="../../settings.js"></script>
 <div class="header"></div>
 <div class="read-actions">

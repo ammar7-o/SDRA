@@ -8,6 +8,8 @@ document.write(`
     <title>SDRA Wiki</title>
     <link rel="stylesheet" href="../../SDRA-reader/style.css">
     <link rel="stylesheet" href="../../font-awesome/css/all.min.css">
+      <link rel="stylesheet" href="../../../SDRA-reader/style.css">
+    <link rel="stylesheet" href="../../../font-awesome/css/all.min.css">
 
 </head>
 </head>
@@ -28,6 +30,7 @@ document.write(`
             </header>
             <div class="actions">
                 <a id="exit" href="../../index.html">Exit</a>
+
             </div>
              <div class="list">
             </div>
@@ -54,13 +57,18 @@ document.write(`
 
     <div class="settings-overlay">
         <div class="head">
-            <h2>settings</h2>
+            <h2>Settings</h2>
             <div onclick="openSettings()" class="close"><i class="fas fa-close"></i></div>
         </div>
         <div class="item">
             <span class="label">Dark mode</span>
             <a href="#" class="toogle-theme"><i class="fas fa-sun"></i></a>
         </div>
+         <div class="item">
+            <span class="label">Full screen</span>
+            <a href="#" onclick="SuperToogleFullScreen()" ><i class="fa-solid fa-desktop"></i></a>
+        </div>
+
     </div>
     <div class="overlay"></div>
 </body>
@@ -68,6 +76,9 @@ document.write(`
 <script src="../../settings.js"></script>
 
 <script src="../../SDRA-reader/app.js"></script>
+<script src="../../../settings.js"></script>
+
+<script src="../../../SDRA-reader/app.js"></script>
 
 
 </html>

@@ -162,10 +162,10 @@ img {
 
 .toc-sidebar {
     position: fixed;
-    top: 0;
+    top: 55px;
     right: -320px;
     width: 300px;
-    height: 100vh;
+    height: 90vh;
     background: var(--aside);
     backdrop-filter: blur(10px);
     color: white;
@@ -249,6 +249,111 @@ img {
 }
 
 /* ============================= */
+
+.rtl {
+    direction: rtl;
+}
+
+.ltr {
+    direction: ltr;
+
+}
+
+.center {
+    text-align: center;
+}
+
+/* استثناء Table of Contents من تغييرات القراءة */
+.toc-sidebar,
+.toc-sidebar * {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+/* استثناء Read Actions و TOC */
+.read-actions,
+.toc-sidebar {
+    font-size: 1rem;
+    /* ثابت */
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 40;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+
+    background-color: #21212131;
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: width 0.4s ease, padding 0.4s ease;
+    line-height: normal !important;
+}
+
+/* الصورة القابلة للتكبير */
+.zoomable-img {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+
+}
+
+/* الخلفية */
+.image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.image-zoom-overlay img {
+    position: relative;
+    z-index: 1; /* مهم */
+    max-width: 100%;
+    max-height: 100%;
+    cursor: zoom-out;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+      pointer-events: auto;
+}
+
+.image-zoom-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 10; /* أعلى من الصورة */
+}
+
+@media (max-width: 768px) {
+    .read-actions {
+        top: 5px;
+        left: 5px;
+    }
+
+    #read-action-btn i {
+        transform: rotate(-90deg);
+    }
+
+    #read-action-btn.open i {
+        transform: rotate(-270deg);
+    }
+
+    
+}
+
 /* Print Mode */
 @media print {
 
@@ -259,6 +364,11 @@ img {
     #search-btn,
     #print-btn {
         display: none !important;
+    }
+
+    .header {
+        display: none;
+        opacity: none;
     }
 
     body::before {
@@ -288,103 +398,7 @@ img {
         overflow: visible !important;
         height: auto !important;
     }
-}
-
-.rtl {
-    direction: rtl;
-}
-
-.ltr {
-    direction: ltr;
-
-}
-
-.center {
-    text-align: center;
-}
-
-/* استثناء Table of Contents من تغييرات القراءة */
-.toc-sidebar,
-.toc-sidebar * {
-    font-size: 14px !important;
-    line-height: 1.4 !important;
-}
-
-/* استثناء Read Actions و TOC */
-.read-actions,
-.toc-sidebar {
-    font-size: 1rem;
-    /* ثابت */
-}
-.header{
-     width: 100%;
-    height: 60px;
-   
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    z-index: 40;
-    flex-wrap: wrap;
-    display: flex;
-    align-items: center;
-    
-    background-color: #21212131;
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    transition: width 0.4s ease, padding 0.4s ease;
-    line-height: normal !important;
-}
-/* الصورة القابلة للتكبير */
-.zoomable-img {
-    cursor: zoom-in;
-    transition: transform 0.2s ease;
-}
-
-/* الخلفية */
-.image-zoom-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-/* الصورة المكبرة */
-.image-zoom-overlay img {
-    max-width: 90%;
-    max-height: 90%;
-    cursor: zoom-out;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    border-radius: 8px;
-}
-
-/* زر الإغلاق */
-.image-zoom-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 28px;
-    color: white;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .read-actions {
-        top: 0px;
-        /* 👈 مهم جدًا */
-        left: 45%;
+    .title{
+        display: none;
     }
-
-    #read-action-btn i {
-        transform: rotate(-90deg);
-    }
-
-    #read-action-btn.open i {
-        transform: rotate(-270deg);
-    }
-
 }

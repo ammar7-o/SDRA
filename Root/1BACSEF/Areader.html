@@ -1,0 +1,44 @@
+<script src="../../SDRA-reader/structure.js"></script>
+<div class="list-o">
+    <details open>
+        <summary>Arabic</summary>
+        <a onclick="SetIframeSrc('AR/index.html'); ">الدروس اللغوية</a>
+        <a onclick="SetIframeSrc('AR/التمييز.html'); "> التمييز</a>
+
+    </details>
+    <details>
+        <summary>Pages</summary>
+        <a onclick="SetIframeSrc('index.html'); ">الدروس اللغوية</a>
+        <a onclick="SetIframeSrc('التمييز.html'); "> التمييز</a>
+
+    </details>
+</div>
+<script>
+    const listO = document.querySelector(".list-o");
+
+    const wait = setInterval(() => {
+        const list = document.querySelector(".list");
+        if (!list) return;
+
+        list.innerHTML = listO.innerHTML;
+
+
+        clearInterval(wait);
+    }, 20);
+</script>
+<!-- <script>
+  simple
+
+    const list = document.querySelector(".list");
+
+
+    list.innerHTML = `
+            <details open>
+        <summary>Pages</summary>
+        <a onclick="SetIframeSrc('main/SDRA/index.html'); return false;">Start</a>
+        <a onclick="SetIframeSrc('main/pages/jj.html'); return false;">Other</a>
+
+    </details>
+        `;
+
+</script> -->

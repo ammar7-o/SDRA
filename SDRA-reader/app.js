@@ -28,7 +28,7 @@ function SetIframeSrc(src) {
     const newUrl = `${window.location.pathname}?key=${encodedSrc}`;
     window.history.pushState({ path: newUrl }, '', newUrl);
     IFRAME.src = decodedSrc;
-        if (aside) aside.classList.remove("open");
+    if (aside) aside.classList.remove("open");
 }
 
 // ----- إعداد الروابط التلقائية -----
@@ -77,7 +77,7 @@ function setupDataSrcLinks() {
 function loadThemeState() {
     if (IS_FILE) {
         isDarkMode
-        
+
     } else {
         isDarkMode = localStorage.getItem("darkMode") === "true";
     }
@@ -138,16 +138,16 @@ function SuperToogleFullScreen() {
 
 // ----- عند تحميل الصفحة -----
 window.addEventListener('DOMContentLoaded', () => {
-        aside.classList.remove("open")
+    aside.classList.remove("open")
 
     // تحميل محتوى الـiframe إذا كان موجود في الرابط
     const params = new URLSearchParams(window.location.search);
     const key = params.get('key');
     if (key) SetIframeSrc(key);
 
-    // إعداد الروابط التلقائية
+    // إعداد الروابط التلقائية  
     setupAutoLinks();
-
+    setupDataSrcLinks(); // ← مهم
     // تحميل وعرض الوضع الداكن
     loadThemeState();
     renderTheme();
@@ -181,10 +181,12 @@ function initializeReaderFeatures() {
 
 
 
-
-function openAside() {
-    aside.classList.toggle("open")
+function openAside(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    aside.classList.toggle("open");
 }
+
 // ----- إضافة مستمعي الأحداث -----
 if (SettingsBtn) SettingsBtn.addEventListener("click", openSettings);
 if (overlay) overlay.addEventListener("click", openSettings);
@@ -207,7 +209,10 @@ function setupSidebarLinks() {
     });
 }
 
-setupSidebarLinks();
+aside.addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
 // ----- دعم زر الرجوع في المتصفح -----
 window.addEventListener('popstate', () => {
     const params = new URLSearchParams(window.location.search);

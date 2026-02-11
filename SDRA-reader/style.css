@@ -247,7 +247,7 @@ iframe {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-    padding-bottom: 15px;
+    padding: 15px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.3);
 }
 
@@ -476,9 +476,8 @@ iframe {
 
     .settings-overlay .item {
         padding: 12px;
-        flex-direction: column;
+        
         gap: 10px;
-        align-items: flex-start;
     }
 
     .settings-overlay .item .label {
@@ -522,7 +521,11 @@ aside::-webkit-scrollbar-thumb {
     background: var(--primary-color);
     border-radius: 3px;
 }
-
+.actions{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 .read-actions {
     width: 55px;
     height: fit-content;
@@ -653,6 +656,9 @@ aside::-webkit-scrollbar-thumb {
     }
 
     #full-screen {
+        display: none;
+    }
+    .read-actions{
         display: none;
     }
 }
